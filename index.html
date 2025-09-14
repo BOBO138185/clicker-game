@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clicker Girl</title>
+    <link rel="stylesheet" href="style.css?v=20250914">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div id="game-container">
+        <!-- Top Panel for Stats -->
+        <div id="top-panel">
+            <div id="stats-container">
+                <h1>Clicker Girl</h1>
+                <div id="stats-grid">
+                    <div class="stat-item">
+                        <span class="stat-label">クリック数</span>
+                        <span id="click-count">0</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">クリック/秒</span>
+                        <span id="clicks-per-second">0</span>
+                    </div>
+                    <div class="stat-item">
+                        <span id="next-level-info"></span>
+                    </div>
+                </div>
+                <div id="fever-time-indicator" class="hidden">FEVER TIME!</div>
+                <div id="save-load-buttons">
+                    <button id="save-button">セーブ</button>
+                    <button id="load-button">ロード</button>
+                    <button onclick="state.clicks += 1000; updateUI(); console.log('Added 1000 clicks, total:', state.clicks);">+1000クリック（デバッグ）</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Center Panel for Character -->
+        <div id="center-panel">
+            <div id="character-container">
+                <img src="" id="character-image" alt="character">
+                <div id="final-message" class="hidden"></div>
+            </div>
+        </div>
+
+        <!-- Bottom Panel for Gallery -->
+        <div id="bottom-panel">
+            <div id="gallery-container">
+                <h3>ギャラリー</h3>
+                <!-- Gallery will be dynamically added here -->
+            </div>
+        </div>
+
+        <!-- Left Panel for Click Power Upgrades -->
+        <div id="left-panel">
+            <div id="click-power-container">
+                <h2>おもちゃ</h2>
+                <ul id="click-power-list">
+                    <!-- Click power upgrades will be dynamically added here -->
+                </ul>
+            </div>
+        </div>
+
+        <!-- Right Panel for Auto Click Upgrades -->
+        <div id="right-panel">
+            <div id="auto-click-container">
+                <h2>❤しぜん❤</h2>
+                <ul id="auto-click-list">
+                    <!-- Auto click upgrades will be dynamically added here -->
+                </ul>
+            </div>
+        </div>
+    </div>
+    <script src="script.js?v=20250914"></script>
+</body>
+</html>

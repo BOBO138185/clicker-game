@@ -1,0 +1,16 @@
+{
+  "name": "clicker-game",
+  "version": "1.0.0",
+  "description": "A simple clicker game built with HTML, CSS, and JavaScript.",
+  "main": "index.html",
+  "scripts": {
+    "start": "npx http-server . -p 8080 -o",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": ["clicker", "game", "browser"],
+  "author": "Gemini CLI",
+  "license": "ISC",
+  "devDependencies": {
+    "http-server": "^14.1.1"
+  }
+}

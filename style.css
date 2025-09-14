@@ -1,0 +1,449 @@
+/* --- General & Theme --- */
+/* Updated: 2025-09-14 - Responsive Layout Fix */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap');
+
+body {
+    font-family: 'Noto Sans JP', sans-serif;
+    background-color: #1a1a1d; /* Dark background */
+    background-image: radial-gradient(circle, #2c2c2f 1px, transparent 1px);
+    background-size: 25px 25px;
+    color: #c5c6c7; /* Light grey text */
+    user-select: none;
+    margin: 0;
+    padding: 10px;
+    box-sizing: border-box;
+    min-height: 100vh;
+}
+
+/* --- Layout Containers --- */
+#game-container {
+    display: grid;
+    grid-template-areas: 
+        "top top top"
+        "left center right"
+        "bottom bottom bottom";
+    grid-template-columns: 150px 400px 150px;
+    justify-content: center;
+    grid-template-rows: auto 1fr auto;
+    gap: 10px;
+    width: 700px;
+    height: calc(100vh - 20px);
+    margin: 0 auto;
+}
+
+#top-panel { grid-area: top; }
+#left-panel { 
+    grid-area: left; 
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+    max-width: 150px;
+    height: 500px; /* Match image container max height */
+}
+#center-panel { 
+    grid-area: center; 
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+}
+#right-panel { 
+    grid-area: right; 
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+    max-width: 150px;
+    height: 500px; /* Match image container max height */
+}
+#bottom-panel { grid-area: bottom; }
+
+body.fever-active #left-panel > div,
+body.fever-active #center-panel > div,
+body.fever-active #right-panel > div,
+body.fever-active #top-panel > div,
+body.fever-active #bottom-panel > div {
+    animation: fever-pulse 1.5s infinite;
+}
+
+/* --- Panel Styling --- */
+#stats-container, #upgrade-container, #character-container, #gallery-container, 
+#click-power-container, #auto-click-container {
+    background: rgba(20, 20, 22, 0.85);
+    border: 1px solid #ff69b4;
+    border-radius: 15px;
+    box-shadow: 0 0 20px rgba(255, 105, 180, 0.2), inset 0 0 15px rgba(255, 105, 180, 0.1);
+    backdrop-filter: blur(10px);
+}
+
+/* --- Top Panel: Stats --- */
+#stats-container {
+    padding: 10px 15px;
+    text-align: center;
+    height: auto;
+}
+
+#stats-grid {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin: 15px 0;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.stat-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+}
+
+.stat-label {
+    font-size: 0.9em;
+    color: #aaa;
+}
+
+.stat-item span:last-child {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #ff69b4;
+}
+
+#stats-container h1 {
+    margin: 0 0 15px 0;
+    font-size: 28px;
+    color: #ff69b4;
+    text-shadow: 0 0 10px #ff69b4;
+}
+
+/* --- Center Panel: Character --- */
+#character-container {
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+    max-height: 500px;
+}
+
+#character-image {
+    display: block;
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    cursor: pointer;
+    border-radius: 15px;
+    transition: transform 0.1s;
+}
+
+#character-image:active {
+    transform: scale(1.08);
+    transition: transform 0.1s;
+}
+
+/* --- Bottom Panel: Gallery --- */
+#gallery-container {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    padding: 10px;
+    overflow-x: auto;
+    height: 100px;
+}
+
+#gallery-container h3 {
+    text-align: center;
+    margin: 0 0 15px 0;
+    color: #ff69b4;
+    text-shadow: 0 0 8px rgba(255, 105, 180, 0.7);
+    flex-shrink: 0;
+    width: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.gallery-thumbnail {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    cursor: pointer;
+    border: 2px solid transparent;
+    border-radius: 5px;
+    transition: all 0.3s;
+    flex-shrink: 0;
+}
+
+.gallery-thumbnail:hover {
+    border-color: #ff85c1;
+    transform: scale(1.05);
+}
+
+.gallery-thumbnail.selected {
+    border-color: #ff69b4;
+    box-shadow: 0 0 15px rgba(255, 105, 180, 0.7);
+}
+
+/* --- Left Panel: Click Power --- */
+#click-power-container {
+    padding: 10px;
+    overflow-y: auto;
+    flex: 1;
+    min-height: 0;
+    max-width: 100%;
+}
+
+#click-power-container h2 {
+    text-align: center;
+    margin-top: 0;
+    margin-bottom: 15px;
+    color: #ff69b4;
+    text-shadow: 0 0 8px rgba(255, 105, 180, 0.7);
+    font-size: 1.2em;
+}
+
+#click-power-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+/* --- Right Panel: Auto Click --- */
+#auto-click-container {
+    padding: 10px;
+    overflow-y: auto;
+    flex: 1;
+    min-height: 0;
+    max-width: 100%;
+}
+
+#auto-click-container h2 {
+    text-align: center;
+    margin-top: 0;
+    margin-bottom: 15px;
+    color: #ff69b4;
+    text-shadow: 0 0 8px rgba(255, 105, 180, 0.7);
+    font-size: 1.2em;
+}
+
+#auto-click-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+/* --- Center Panel: Character & Stats --- */
+/* DUPLICATE RULE REMOVED */
+
+#stats-container {
+    padding: 10px 15px;
+    text-align: center;
+    flex-shrink: 0;
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+#stats-container h1 {
+    margin: 0 0 15px 0;
+    font-size: 32px;
+    color: #ff69b4;
+    text-shadow: 0 0 10px #ff69b4;
+}
+
+#stats-container p {
+    margin: 8px 0;
+    font-size: 16px;
+}
+
+#upgrade-container {
+    padding: 10px;
+    overflow-y: auto;
+    flex-grow: 1;
+}
+
+#upgrade-container h2 {
+    text-align: center;
+    margin-top: 0;
+    margin-bottom: 12px;
+    color: #ff69b4;
+    text-shadow: 0 0 6px rgba(255, 105, 180, 0.7);
+    font-size: 1.2em;
+}
+
+#upgrade-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+/* --- Upgrade Item Styling (New) --- */
+.upgrade-item {
+    position: relative;
+    width: 50px;
+    height: 50px;
+    margin: 0 auto 8px;
+    border-radius: 8px;
+    background-size: cover;
+    background-position: center;
+    border: 2px solid #666;
+    overflow: hidden;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.upgrade-info-overlay {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-color: rgba(0, 0, 0, 0.7); /* Default dark overlay */
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 5px;
+    text-align: center;
+    transition: background-color 0.3s ease;
+}
+
+.upgrade-item.affordable .upgrade-info-overlay {
+    background-color: rgba(0, 0, 0, 0.3); /* Lighter overlay for affordable items */
+}
+
+.upgrade-item.affordable:hover .upgrade-info-overlay {
+    background-color: rgba(0, 0, 0, 0.1); /* Even lighter on hover */
+}
+
+.upgrade-name {
+    font-weight: bold;
+    font-size: 0.7em;
+    line-height: 1.2;
+    text-shadow: 1px 1px 3px #000;
+}
+
+.upgrade-effect {
+    font-size: 0.8em;
+    color: #ffc107; /* Gold color for effect */
+    text-shadow: 1px 1px 3px #000;
+}
+
+.upgrade-cost {
+    font-size: 0.6em;
+    font-weight: bold;
+    margin-top: 4px;
+    text-shadow: 1px 1px 3px #000;
+}
+
+/* Affordable/Unaffordable States */
+.upgrade-item.affordable {
+    border-color: #ff69b4;
+    box-shadow: 0 0 10px rgba(255, 105, 180, 0.3);
+}
+
+.upgrade-item.unaffordable {
+    cursor: not-allowed;
+}
+
+.upgrade-item.unaffordable .upgrade-info-overlay {
+    background-color: rgba(20, 0, 0, 0.85); /* Darker red overlay for unaffordable */
+    color: #888;
+}
+
+.upgrade-item.unaffordable .upgrade-effect {
+    color: #aaa;
+}
+
+/* --- Misc Elements --- */
+#save-load-buttons {
+    margin-top: 15px;
+}
+
+#save-load-buttons button {
+    background-color: #7f8c8d;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 0 5px;
+    transition: background-color 0.2s;
+}
+
+#save-load-buttons button:hover {
+    background-color: #95a5a6;
+}
+
+#final-message {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    font-size: 1.2em;
+}
+
+.hidden { display: none !important; }
+
+#fever-time-indicator {
+    margin-top: 10px;
+    padding: 5px 15px;
+    background-color: #ff4757;
+    color: white;
+    font-weight: bold;
+    border-radius: 5px;
+    display: inline-block;
+}
+
+#fever-time-indicator.active {
+    animation: blink 1s infinite;
+}
+
+.floating-heart {
+    position: absolute;
+    font-size: 24px;
+    color: #ff69b4;
+    animation: float-heart 1.5s ease-out forwards;
+    pointer-events: none;
+    user-select: none;
+    z-index: 10;
+}
+
+.lucky-heart {
+    position: absolute;
+    font-size: 50px;
+    color: gold;
+    text-shadow: 0 0 10px yellow, 0 0 20px orange;
+    cursor: pointer;
+    animation: pulse-and-move 5s linear forwards;
+    z-index: 100;
+}
+
+/* --- Keyframes --- */
+@keyframes fever-pulse {
+    0% { box-shadow: 0 0 0 0 rgba(255, 105, 180, 0.7), inset 0 0 15px rgba(255, 105, 180, 0.1); }
+    70% { box-shadow: 0 0 20px 40px rgba(255, 105, 180, 0), inset 0 0 30px rgba(255, 105, 180, 0.5); }
+    100% { box-shadow: 0 0 0 0 rgba(255, 105, 180, 0), inset 0 0 15px rgba(255, 105, 180, 0.1); }
+}
+
+@keyframes blink {
+    50% { opacity: 0.5; }
+}
+
+@keyframes pulse-and-move {
+    0% { transform: scale(1) translateY(0); opacity: 1; }
+    50% { transform: scale(1.2) translateY(-100px); }
+    100% { transform: scale(1) translateY(-200px); opacity: 0; }
+}
+
+@keyframes float-heart {
+    from { opacity: 1; transform: translateY(0) scale(1); }
+    to { opacity: 0; transform: translateY(-150px) translateX(var(--random-x, 0)) scale(0.5); }
+}
+
+/* --- Fixed Layout (No Responsive) --- */
+/* レイアウトを固定してウィンドウサイズの変更に対応しない */
